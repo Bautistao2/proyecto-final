@@ -1,0 +1,8 @@
+{
+    "type_accuracy": 0.969,
+    "wing_accuracy": 0.947,
+    "features_used": 80,
+    "samples_count": 1000,
+    "timestamp": "20250521_145144",
+    "model_file": "model_20250521_145144.joblib"
+}
