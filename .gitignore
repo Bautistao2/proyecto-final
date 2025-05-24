@@ -3,3 +3,7 @@ env/
 **/venv/
 **/env/
 entornoapp/
+node_modules/
+.cache/
+node_modules/
+**/.cache/
