@@ -1,0 +1,91 @@
+/* Estilos personalizados adicionales a Tailwind */
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Estilos para los botones de respuesta */
+.answer-btn {
+    @apply transition-all duration-200 ease-in-out;
+}
+
+.answer-btn:hover {
+    @apply transform scale-105 shadow-md;
+}
+
+.answer-btn:active {
+    @apply transform scale-95;
+}
+
+.answer-btn.selected {
+    @apply border-blue-500 bg-blue-50 dark:bg-blue-900 shadow-inner;
+}
+
+/* Transiciones suaves */
+#test, #results, #landing {
+    @apply transition-opacity duration-300 ease-in-out;
+}
+
+/* Contenedor del gráfico */
+#results-chart {
+    @apply p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg;
+    min-height: 300px;
+}
+
+/* Efecto hover para botones principales */
+#start-test, #prev-question, #next-question {
+    @apply transition-all duration-200;
+}
+
+#start-test:hover {
+    @apply transform scale-105 shadow-lg;
+}
+
+/* Transiciones del modo oscuro */
+.dark {
+    @apply transition-colors duration-300;
+}
+
+/* Animación de carga */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Estilos para tooltips */
+.tooltip {
+    @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+    @apply visible z-50;
+}
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 640px) {
+    .answer-btn {
+        @apply text-sm py-1 px-2;
+    }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .progress-bar-animated {
+        transition: none;
+    }
+}
+
+/* Personalización de la barra de progreso */
+.progress-bar-animated {
+    transition: width 0.3s ease-in-out;
+}

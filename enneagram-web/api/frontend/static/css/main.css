@@ -1,0 +1,121 @@
+/* Animaciones base */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Estilos para los botones de respuesta */
+.answer-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.answer-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.answer-btn:active {
+    transform: scale(0.95);
+}
+
+.answer-btn.selected {
+    border-color: #3B82F6;
+    background-color: #EFF6FF;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.dark .answer-btn.selected {
+    border-color: #60A5FA;
+    background-color: #1E3A8A;
+}
+
+/* Estilos para el botón de auto-rellenar */
+#auto-fill {
+    transition: all 0.2s ease-in-out;
+}
+
+#auto-fill:hover {
+    transform: scale(1.05);
+}
+
+#auto-fill:active {
+    transform: scale(0.95);
+}
+
+/* Transiciones suaves */
+#test, #results, #landing {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Contenedor del gráfico */
+#results-chart {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    min-height: 300px;
+}
+
+.dark #results-chart {
+    background-color: #1F2937;
+}
+
+/* Botones principales */
+#start-test, #prev-question, #next-question {
+    transition: all 0.2s ease-in-out;
+}
+
+#start-test:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animación del modo oscuro */
+.dark {
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Personalización de la barra de progreso */
+.progress-bar-animated {
+    transition: width 0.3s ease-in-out;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .progress-bar-animated,
+    .answer-btn,
+    #test,
+    #results,
+    #landing,
+    .dark {
+        transition: none;
+    }
+    .answer-btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 640px) {
+    .answer-btn {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+    #results-chart {
+        min-height: 250px;
+    }
+}

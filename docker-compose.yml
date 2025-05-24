@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  model:
+    build:
+      context: ./model
+      dockerfile: dockerfile
+    volumes:
+      - ./results:/app/results
+    # Puedes exponer un puerto si el modelo ofrece API, si no, omite la línea siguiente
+    # ports:
+    #   - "5000:5000"
+
+  web:
+    build:
+      context: ./enneagram-web
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - model
+    # Si tu web necesita acceder a los modelos generados, puedes montar el mismo volumen
+    volumes:
+      - ./results:/enneagram-web/results

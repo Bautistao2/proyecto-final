@@ -1,0 +1,402 @@
+[
+  {
+    "id": 58,
+    "text": "Por muchos indicadores, tengo un carácter bastante dramático y temperamental",
+    "eneatipo": 4
+  },
+  {
+    "id": 6,
+    "text": "La autoridad me atrae, pero al mismo tiempo desconfío de quienes la ejercen. Es algo extraño...",
+    "eneatipo": 6
+  },
+  {
+    "id": 40,
+    "text": "Me cuesta participar en proyectos cuando no tengo el control creativo",
+    "eneatipo": 4
+  },
+  {
+    "id": 67,
+    "text": "Paso mucho tiempo imaginando situaciones y conversaciones que ni siquiera han ocurrido",
+    "eneatipo": 4
+  },
+  {
+    "id": 135,
+    "text": "Durante el día hago todo lo que debo hacer, pero cuando termina la jornada sé relajarme y tomarme las cosas con calma",
+    "eneatipo": 9
+  },
+  {
+    "id": 47,
+    "text": "A veces ni yo me creo todo lo que he llegado a hacer por la gente, y me molesta mucho que ni se den cuenta ni les importe",
+    "eneatipo": 2
+  },
+  {
+    "id": 35,
+    "text": "Sé cómo lograr resultados y cómo recompensar e incentivar a la gente para que haga lo necesario",
+    "eneatipo": 8
+  },
+  {
+    "id": 131,
+    "text": "Me concentro tanto en lo que hago que por lo general ni me doy cuenta de cómo pasa el tiempo",
+    "eneatipo": 5
+  },
+  {
+    "id": 65,
+    "text": "Con frecuencia me sorprendo a mí mismo tratando de ganarme a las personas, sobre todo si al inicio se muestran indiferentes conmigo",
+    "eneatipo": 2
+  },
+  {
+    "id": 85,
+    "text": "Cuando las cosas se ponen difíciles, tiendo a venirme abajo y rendirme",
+    "eneatipo": 4
+  },
+  {
+    "id": 105,
+    "text": "Soy muy trabajador, de verdad: no me detengo hasta terminar una tarea",
+    "eneatipo": 6
+  },
+  {
+    "id": 18,
+    "text": "No me importa estar acompañado o estar solo",
+    "eneatipo": 9
+  },
+  {
+    "id": 128,
+    "text": "Me encanta desvivirme para que las personas se sientan acogidas y valoradas",
+    "eneatipo": 2
+  },
+  {
+    "id": 20,
+    "text": "He notado que las personas reaccionan con simpatía cuando les presto atención y las animo",
+    "eneatipo": 2
+  },
+  {
+    "id": 14,
+    "text": "Soy alguien muy reservado",
+    "eneatipo": 5
+  },
+  {
+    "id": 10,
+    "text": "Siempre he procurado ser sincero y objective conmigo mismo, y estoy decidido a ser fiel a mi conciencia cueste lo que cueste",
+    "eneatipo": 1
+  },
+  {
+    "id": 118,
+    "text": "Han recaído muchas responsabilidades sobre mis hombros",
+    "eneatipo": 1
+  },
+  {
+    "id": 4,
+    "text": "Mucha gente piensa que soy enigmático, complicado y contradictorio y a mí me encanta que así sea.",
+    "eneatipo": 4
+  },
+  {
+    "id": 38,
+    "text": "Me hace sentir bien saber que soy alguien atento y generoso",
+    "eneatipo": 2
+  },
+  {
+    "id": 37,
+    "text": "Siento que he pagado un alto precio por intentar ser perfecto",
+    "eneatipo": 1
+  },
+  {
+    "id": 134,
+    "text": "Por lo general, a alguien le tiene que tocar la peor parte, y yo no quiero que me toque a mí",
+    "eneatipo": 8
+  },
+  {
+    "id": 133,
+    "text": "Me encanta estar con gente, siempre y cuando quieran ir adonde yo voy",
+    "eneatipo": 7
+  },
+  {
+    "id": 78,
+    "text": "Algunos me consideran muy inquieto y nervioso... pero no tienen ni idea de la mitad!",
+    "eneatipo": 6
+  },
+  {
+    "id": 19,
+    "text": "Aunque hay una parte de mí que podría ser algo alocada, en general ese no ha sido exactamente mi estilo",
+    "eneatipo": 1
+  },
+  {
+    "id": 91,
+    "text": "Detesto los errores, así que tiendo a ser muy meticuloso para asegurarme de que las cosas se hagan bien",
+    "eneatipo": 1
+  },
+  {
+    "id": 23,
+    "text": "No me siento muy importante ni poderoso",
+    "eneatipo": 5
+  },
+  {
+    "id": 113,
+    "text": "Soy muy curioso y me gusta indagar por qué las cosas son como son",
+    "eneatipo": 5
+  },
+  {
+    "id": 98,
+    "text": "Me considero una persona desafiante, alguien que empuja a los demás fuera de su zona de confort para que den todo de sí",
+    "eneatipo": 8
+  },
+  {
+    "id": 94,
+    "text": "Puedo perdonarme casi cualquier cosa, excepto el mal gusto",
+    "eneatipo": 4
+  },
+  {
+    "id": 16,
+    "text": "Suelo tener la agenda a tope, y así me gusta: no me quedo quieto ni un momento",
+    "eneatipo": 7
+  },
+  {
+    "id": 115,
+    "text": "Uno de mis mayores problemas es que me distraigo con facilidad y me disperso demasiado",
+    "eneatipo": 7
+  },
+  {
+    "id": 126,
+    "text": "Tengo lo que podría llamarse una filosofía de vida que me orienta y me brinda mucho consuelo en las épocas difíciles",
+    "eneatipo": 9
+  },
+  {
+    "id": 119,
+    "text": "A menudo mi salud y mi economía han sufrido porque pongo las necesidades e intereses de los demás por delante de los míos",
+    "eneatipo": 2
+  },
+  {
+    "id": 111,
+    "text": "Soy más adaptable que la mayoría: si las cosas no marchan bien, sé modificar mi comportamiento para conseguir los resultados que busco",
+    "eneatipo": 3
+  },
+  {
+    "id": 11,
+    "text": "Ser amistoso me nace de forma natural: entablo conversación con facilidad y trato de tú a todo el mundo",
+    "eneatipo": 2
+  },
+  {
+    "id": 84,
+    "text": "A veces he tenido que tomar uno que otro atajo para lograr mis objetivos",
+    "eneatipo": 3
+  },
+  {
+    "id": 32,
+    "text": "Si los demás supieran lo que pasa por mi mente la mayor parte del tiempo, pensarían que estoy loco",
+    "eneatipo": 5
+  },
+  {
+    "id": 43,
+    "text": "Hay algo que no soporto bajo ningún concepto: aburrirme.  Procuro no aburrirme nunca.",
+    "eneatipo": 7
+  },
+  {
+    "id": 42,
+    "text": "Puede que no siempre esté de acuerdo con las reglas ni las cumpla al pie de la letra, pero de todos modos me interesa conocerlas",
+    "eneatipo": 6
+  },
+  {
+    "id": 114,
+    "text": "Cuando tengo que tomar una decisión importante, pido la opinión de las personas en las que confío",
+    "eneatipo": 6
+  },
+  {
+    "id": 74,
+    "text": "Disfruto de forma especial recibiendo en mi casa a amigos y familiares, y cuidándolos",
+    "eneatipo": 2
+  },
+  {
+    "id": 97,
+    "text": "Cuando realmente quiero algo, normalmente encuentro la forma de conseguirlo",
+    "eneatipo": 7
+  },
+  {
+    "id": 64,
+    "text": "No entiendo por qué tanta gente tiene valores morales tan laxos",
+    "eneatipo": 1
+  },
+  {
+    "id": 80,
+    "text": "Las personas que me conocen agradecen que les hable con franqueza y les diga exactamente lo que pienso",
+    "eneatipo": 8
+  },
+  {
+    "id": 26,
+    "text": "Cuando quiero a alguien, lo considero parte de \"\"mi gente\"\" y siento la necesidad de velar por sus intereses",
+    "eneatipo": 8
+  },
+  {
+    "id": 33,
+    "text": "Me siento más seguro cumpliendo lo que se espera de mí que yendo por libre",
+    "eneatipo": 6
+  },
+  {
+    "id": 72,
+    "text": "Me han dicho que a veces parezco despistado",
+    "eneatipo": 9
+  },
+  {
+    "id": 117,
+    "text": "Prefiero enfocarme en lo positivo antes que insistir en lo negativo",
+    "eneatipo": 9
+  },
+  {
+    "id": 101,
+    "text": "Hago un esfuerzo especial por enterarme de qué les pasa a las personas que quiero",
+    "eneatipo": 2
+  },
+  {
+    "id": 68,
+    "text": "Si hay que resolver un problema, prefiero trabajarlo por mi cuenta y encontrar la respuesta por mí mismo",
+    "eneatipo": 5
+  },
+  {
+    "id": 66,
+    "text": "Estoy al tanto de lo bien que les va a mis amigos y colegas, y tiendo a compararme con ellos",
+    "eneatipo": 3
+  },
+  {
+    "id": 61,
+    "text": "Soy curioso y atrevido",
+    "eneatipo": 7
+  },
+  {
+    "id": 102,
+    "text": "Por supuesto que me molesta cuando los demás no reconocen la excelencia de lo que hago",
+    "eneatipo": 3
+  },
+  {
+    "id": 22,
+    "text": "A menudo me siento solo incluso estando rodeado de amigos",
+    "eneatipo": 4
+  },
+  {
+    "id": 87,
+    "text": "Sé cuánto enredo puedo armar yo mismo, así que me parece lógico desconfiar de las intenciones de los demás",
+    "eneatipo": 6
+  },
+  {
+    "id": 53,
+    "text": "Tengo la voluntad muy fuerte, y no suelo renunciar ni echarme atrás fácilmente",
+    "eneatipo": 8
+  },
+  {
+    "id": 123,
+    "text": "Es muy extraño: puedo ser escéptico, incluso cínico, respecto a todo tipo de cosas, y de pronto dejarme engañar por completo con algo",
+    "eneatipo": 6
+  },
+  {
+    "id": 5,
+    "text": "Me encanta profundizar en las cosas",
+    "eneatipo": 5
+  },
+  {
+    "id": 69,
+    "text": "No me gusta tomar decisiones importantes, pero desde luego tampoco quiero que alguien más las tome por mí",
+    "eneatipo": 6
+  },
+  {
+    "id": 52,
+    "text": "Me involucro bastante cuando estoy en una relación, pero cuando esta termina, sigo adelante con otra cosa",
+    "eneatipo": 7
+  },
+  {
+    "id": 127,
+    "text": "Me conmueve enormemente la nobleza humana y ver que la gente mantiene el buen ánimo en medio de las dificultades",
+    "eneatipo": 1
+  },
+  {
+    "id": 125,
+    "text": "Me siento más vivo cuando hago algo que los demás creen imposible",
+    "eneatipo": 8
+  },
+  {
+    "id": 129,
+    "text": "Tengo una vena de adicto al trabajo: me siento perdido si no estoy haciendo cosas",
+    "eneatipo": 3
+  },
+  {
+    "id": 44,
+    "text": "No suelo sentir mucha compasión por los débiles o indecisos",
+    "eneatipo": 8
+  },
+  {
+    "id": 120,
+    "text": "Siempre tengo un objetivo en mente, y sé cómo motivarme para alcanzarlo",
+    "eneatipo": 3
+  },
+  {
+    "id": 62,
+    "text": "Nada me hace sentir más orgulloso que ver actuar por su cuenta a alguien a quien he tomado bajo mi protección",
+    "eneatipo": 8
+  },
+  {
+    "id": 71,
+    "text": "Tengo un lado tierno, incluso algo sentimental, que muestro a muy poca gente",
+    "eneatipo": 8
+  },
+  {
+    "id": 79,
+    "text": "No soy solo una 'persona divertida'",
+    "eneatipo": 7
+  },
+  {
+    "id": 41,
+    "text": "Solo con la información adecuada se puede tomar una decisión racional",
+    "eneatipo": 5
+  },
+  {
+    "id": 103,
+    "text": "Por lo general, no me gusta trabajar demasiado cerca de otras personas",
+    "eneatipo": 4
+  },
+  {
+    "id": 92,
+    "text": "Soy capaz de expresar mis sentimientos hacia otras personas con más franqueza que la mayoría",
+    "eneatipo": 2
+  },
+  {
+    "id": 82,
+    "text": "Siento que tengo una misión personal, quizá una vocación hacia algo más elevado, y creo que a lo largo de mi vida podría lograr algo extraordinario",
+    "eneatipo": 1
+  },
+  {
+    "id": 83,
+    "text": "Sé ser amable y brindar apoyo, pero tengo más dureza en mí de lo que la gente supone",
+    "eneatipo": 2
+  },
+  {
+    "id": 95,
+    "text": "La mayoría de la gente es increíblemente ignorante",
+    "eneatipo": 5
+  },
+  {
+    "id": 89,
+    "text": "He tenido que trabajar mucho por todo lo que tengo",
+    "eneatipo": 8
+  },
+  {
+    "id": 122,
+    "text": "Mi mente es tan vehemente y activa que a veces siento como si ardiera",
+    "eneatipo": 5
+  },
+  {
+    "id": 48,
+    "text": "Para bien o para mal, se me da bien ocultar mis inseguridades: nadie llega a adivinar lo que realmente siento",
+    "eneatipo": 3
+  },
+  {
+    "id": 7,
+    "text": "Me fascina viajar y descubrir todo tipo de comidas, personas y experiencias. ¡todo el torbellino fabuloso de la vida!",
+    "eneatipo": 7
+  },
+  {
+    "id": 1,
+    "text": "La gente suele verme como alguien serio y prudente, y la verdad es que creo que tienen razón",
+    "eneatipo": 1
+  },
+  {
+    "id": 100,
+    "text": "Durante gran parte de mi vida he creído que lo que está bien, está bien, y lo que está mal, está mal, sin más",
+    "eneatipo": 1
+  }
+]
