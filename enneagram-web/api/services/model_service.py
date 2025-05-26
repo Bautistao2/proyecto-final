@@ -5,6 +5,7 @@ from typing import Tuple, Dict
 import pandas as pd
 import tensorflow as tf
 import os
+from api.services.post_processing import post_process_prediction
 
 class ModelService:
     def __init__(self, model_path: Path = None):
@@ -29,7 +30,7 @@ class ModelService:
         except Exception as e:
             print(f"Error cargando el modelo: {str(e)}")
             raise
-
+    
     async def predict(self, features: np.ndarray) -> Dict:
         """
         Realiza una predicción con el modelo retornando tipo, ala y probabilidades
@@ -47,12 +48,17 @@ class ModelService:
             prediction_dict = self.model.predict(features)
             
             # Obtener predicciones y probabilidades
-            return {
+            raw_prediction = {
                 'enneagram_type': int(prediction_dict['eneatipo'][0]),
                 'wing': int(prediction_dict['ala'][0]),
                 'type_probabilities': prediction_dict['eneatipo_probabilidades'].flatten().tolist(),
                 'wing_probabilities': prediction_dict['ala_probabilidades'].flatten().tolist()
             }
+            
+            # Apply post-processing to ensure wing is adjacent to type
+            corrected_prediction = post_process_prediction(raw_prediction)
+            
+            return corrected_prediction
         except Exception as e:
             print(f"Error en predicción: {str(e)}")
             print(f"Shape de features: {features.shape}")
