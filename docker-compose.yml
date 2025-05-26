@@ -6,7 +6,7 @@ services:
       context: ./model
       dockerfile: dockerfile
     volumes:
-      - ./results:/app/results
+      - ./model/results:/app/results
     # Puedes exponer un puerto si el modelo ofrece API, si no, omite la línea siguiente
     # ports:
     #   - "5000:5000"
@@ -20,5 +20,26 @@ services:
     depends_on:
       - model
     # Si tu web necesita acceder a los modelos generados, puedes montar el mismo volumen
+    
+  backend:
+    build:
+      context: ./web-predictor/backend
+      dockerfile: Dockerfile
     volumes:
-      - ./results:/enneagram-web/results
+      - ./model:/app/model
+      - ./model/results:/app/results
+      - ./results:/app/results-alt  # Ruta alternativa por si los modelos están aquí
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DOCKER=true
+
+  frontend:
+    build:
+      context: ./web-predictor/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

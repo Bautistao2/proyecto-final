@@ -2,9 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import logging
+import os
 
 from src.core.settings import PROJECT_NAME, VERSION, API_V1_PREFIX, CORS_ORIGINS
 from src.api.routes import predictor, questions
+
+# Ejecutar verificación de entorno
+try:
+    from src.utils.environment_check import print_environment_report
+    env_status = print_environment_report()
+except Exception as e:
+    print(f"Error verificando el entorno: {e}")
 
 # Configure logging
 logging.basicConfig(

@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 # Establece el directorio de trabajo
-WORKDIR /app
+WORKDIR /model
 
 # Copia requirements.txt de la raíz y lo instala
 COPY ../requirements.txt .
@@ -15,7 +15,7 @@ COPY . .
 RUN mkdir -p results
 
 # Define el volumen para persistir archivos .joblib de results
-VOLUME ["/app/results"]
+VOLUME ["/app/model/results"]
 
 # Comando por defecto: ejecuta main.py (puedes pasarle argumentos al correr el contenedor)
 CMD ["python", "-m", "eneagrama_predictor.main", "--mode", "train", "--data", "eneagrama_predictor/data.csv", "--questions", "80", "--model", "modelo_reducido.joblib"]

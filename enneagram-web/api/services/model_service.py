@@ -10,7 +10,7 @@ class ModelService:
     def __init__(self, model_path: Path = None):
         # Si no se proporciona una ruta, usar la ruta por defecto
         if model_path is None:
-            model_path = Path("enneagram-web/models/model_20250516_143648.joblib")
+            model_path = Path("C:/Users/bauti/Documents/claude/enneagram-web/models/model_20250516_143648.joblib")
         
         self.model_path = Path(model_path).resolve()  # Convertir a ruta absoluta
         self.model = None
