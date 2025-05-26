@@ -24,7 +24,7 @@ services:
   backend:
     build:
       context: ./web-predictor/backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.simple
     volumes:
       - ./model:/app/model
       - ./model/results:/app/results
