@@ -1,4 +1,3 @@
-
 #optimized_enneagram_system.py
 import numpy as np
 import pandas as pd
@@ -8,6 +7,132 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_selection import mutual_info_classif
 from eneagrama_predictor.data_preprocessing import DataPreprocessor
 from eneagrama_predictor.data_augmentation import EnneagramDataAugmentor
+
+# Importaciones para Supabase
+import os
+from pathlib import Path
+try:
+    from supabase import create_client, Client
+    from dotenv import load_dotenv
+    SUPABASE_AVAILABLE = True
+except ImportError:
+    SUPABASE_AVAILABLE = False    
+    # Solo mostrar advertencia si se está ejecutando directamente el módulo
+    import sys
+    if __name__ == "__main__" or "main" in sys.argv[0]:
+        print("⚠️ Supabase no disponible. Usando CSV como fallback.")
+
+def load_training_data(source='auto', csv_fallback_path='data.csv'):
+    """
+    Carga datos de entrenamiento desde Supabase o CSV como fallback
+    
+    Args:
+        source: 'auto', 'supabase', 'csv'
+        csv_fallback_path: Ruta al archivo CSV de fallback
+        
+    Returns:
+        tuple: (X, y) donde X son las características y y las etiquetas
+    """
+    print(f"🔄 Intentando cargar datos con fuente: {source}")
+    
+    if source == 'auto' or source == 'supabase':
+        if SUPABASE_AVAILABLE:
+            try:
+                print("📡 Conectando a Supabase...")
+                
+                # Cargar variables de entorno
+                env_path = Path(__file__).parent.parent.parent / '.env'
+                if env_path.exists():
+                    load_dotenv(dotenv_path=env_path)
+                else:
+                    # Buscar .env en otros lugares
+                    for possible_path in [Path.cwd() / '.env', Path(__file__).parent / '.env']:
+                        if possible_path.exists():
+                            load_dotenv(dotenv_path=possible_path)
+                            break
+                
+                # Configuración de Supabase
+                supabase_url = os.getenv("SUPABASE_URL")
+                supabase_key = os.getenv("SUPABASE_KEY")
+                table_name = os.getenv("SUPABASE_TABLE", "respuestas_para_ia")
+                
+                if not (supabase_url and supabase_key):
+                    raise Exception("Credenciales de Supabase no encontradas en variables de entorno")
+                
+                # Crear cliente Supabase
+                supabase: Client = create_client(supabase_url, supabase_key)
+                
+                print(f"📊 Cargando datos desde tabla: {table_name}")
+                
+                # Cargar todos los datos en lotes para evitar límites
+                all_data = []
+                batch_size = 1000
+                offset = 0
+                
+                while True:
+                    response = supabase.table(table_name).select("*").range(offset, offset + batch_size - 1).execute()
+                    
+                    if not response.data:
+                        break
+                    
+                    all_data.extend(response.data)
+                    offset += batch_size
+                    
+                    if len(response.data) < batch_size:
+                        break
+                
+                if not all_data:
+                    raise Exception(f"No se encontraron datos en la tabla {table_name}")
+                
+                # Convertir a DataFrame
+                df = pd.DataFrame(all_data)
+                print(f"✅ Datos cargados desde Supabase: {df.shape}")
+                
+                # Verificar que tenemos las columnas necesarias
+                question_cols = [col for col in df.columns if col.startswith('Q') and col[1:].isdigit()]
+                if len(question_cols) < 100:
+                    raise Exception(f"Columnas de preguntas insuficientes: {len(question_cols)}")
+                
+                # Separar características (X) y etiquetas (y)
+                X = df[question_cols].copy()
+                
+                # Buscar columnas de etiquetas
+                if 'true_type' in df.columns and 'true_wing' in df.columns:
+                    y = df[['true_type', 'true_wing']].copy()
+                elif 'eneatipo' in df.columns and 'ala' in df.columns:
+                    y = df[['eneatipo', 'ala']].rename(columns={'eneatipo': 'true_type', 'ala': 'true_wing'})
+                else:
+                    raise Exception("No se encontraron columnas de etiquetas válidas")
+                
+                print(f"📋 Características: {X.shape}")
+                print(f"🎯 Etiquetas: {y.shape}")
+                print(f"🔢 Tipos únicos: {sorted(y['true_type'].unique())}")
+                print(f"🪶 Alas únicas: {sorted(y['true_wing'].unique())}")
+                
+                return X, y
+                
+            except Exception as e:
+                print(f"❌ Error cargando desde Supabase: {e}")
+                if source == 'supabase':
+                    raise
+                print("🔄 Fallback a CSV...")
+    
+    # Fallback a CSV
+    print(f"📄 Cargando datos desde CSV: {csv_fallback_path}")
+    try:
+        df = pd.read_csv(csv_fallback_path)
+        X = df.iloc[:, :135]  # Preguntas Q1-Q135
+        y = df[['true_type', 'true_wing']].copy()
+        
+        print(f"✅ Datos cargados desde CSV: {df.shape}")
+        print(f"📋 Características: {X.shape}")
+        print(f"🎯 Etiquetas: {y.shape}")
+        
+        return X, y
+        
+    except Exception as e:
+        print(f"❌ Error cargando CSV: {e}")
+        raise Exception(f"No se pudieron cargar datos ni desde Supabase ni desde CSV: {e}")
 
 class OptimizedEnneagramSystem:
     """Sistema optimizado para predicción de eneatipos"""
@@ -363,18 +488,26 @@ class OptimizedEnneagramSystem:
     # 4. Devolver métricas finales
     #return metrics, system
 
-def run_optimized_enneagram_system(data_path, output_path='optimized_enneagram_system.joblib', custom_data=None):
+def run_optimized_enneagram_system(data_path=None, output_path='optimized_enneagram_system.joblib', custom_data=None, data_source='auto'):
     """Ejecuta el sistema completo con datos proporcionados"""
     print("=== SISTEMA OPTIMIZADO DE CLASIFICACIÓN DE ENEAGRAMA ===")
 
     system = OptimizedEnneagramSystem()
     
     if custom_data is None:
-        # 1. Cargar datos
+        # 1. Cargar datos usando la nueva función
         print("\nCargando datos...")
-        df = pd.read_csv(data_path)
-        X = df.iloc[:, :135]  # Preguntas Q1-Q135
-        y = df[['true_type', 'true_wing']].rename(columns={'true_type': 'eneatipo', 'true_wing': 'ala'})
+        
+        # Usar la función de carga inteligente
+        X, y = load_training_data(source=data_source, csv_fallback_path=data_path or 'data.csv')
+        
+        # Renombrar columnas para compatibilidad
+        y = y.rename(columns={'true_type': 'eneatipo', 'true_wing': 'ala'})
+        
+        # === LÍNEAS COMENTADAS: CARGA CSV ORIGINAL ===
+        # df = pd.read_csv(data_path)
+        # X = df.iloc[:, :135]  # Preguntas Q1-Q135
+        # y = df[['true_type', 'true_wing']].rename(columns={'true_type': 'eneatipo', 'true_wing': 'ala'})
     else:
         # Usar datos personalizados proporcionados
         X, y = custom_data
@@ -394,10 +527,26 @@ def run_optimized_enneagram_system(data_path, output_path='optimized_enneagram_s
 if __name__ == "__main__":
     print("=== SISTEMA OPTIMIZADO DE CLASIFICACIÓN DE ENEAGRAMA ===")
     
-    # 1. Cargar datos
+    # 1. Cargar datos con Supabase como prioridad
     print("\nCargando datos...")
-    data_path = 'data.csv'
-    metrics, system = run_optimized_enneagram_system(data_path)
+    
+    # === LÍNEAS COMENTADAS: CARGA CSV ORIGINAL ===
+    # data_path = 'data.csv'
+    # metrics, system = run_optimized_enneagram_system(data_path)
+    
+    # Usar sistema híbrido: Supabase primero, CSV como fallback
+    try:
+        metrics, system = run_optimized_enneagram_system(
+            data_path='data.csv',  # Fallback CSV
+            data_source='auto'     # Intentar Supabase primero
+        )
+    except Exception as e:
+        print(f"❌ Error en el entrenamiento: {e}")
+        print("🔄 Intentando solo con CSV...")
+        metrics, system = run_optimized_enneagram_system(
+            data_path='data.csv',
+            data_source='csv'      # Solo CSV
+        )
     
     # 2. Imprimir resultados finales
     print("\n=== RESULTADOS FINALES ===")

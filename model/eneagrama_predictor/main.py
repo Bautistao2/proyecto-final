@@ -23,9 +23,9 @@ def main():
     # Parse arguments
     parser = argparse.ArgumentParser(description='Enneagram Type Prediction System')
     parser.add_argument('--mode', choices=['train', 'predict', 'evaluate', 'optimize'], required=True,
-                      help='Mode of operation: train, predict, evaluate, or optimize')
-    parser.add_argument('--data', required=True,
-                      help='Path to the data file')
+                      help='Mode of operation: train, predict, evaluate, or optimize')    
+    parser.add_argument('--data', required=False, default=None,
+                      help='Path to the data file (optional, uses Supabase by default)')
     parser.add_argument('--model', default='enneagram_model.joblib',
                       help='Path to save/load the model')
     parser.add_argument('--output', default='results',
@@ -37,46 +37,67 @@ def main():
     parser.add_argument('--portable', action='store_true',
                       help='Create portable model versions')
     args = parser.parse_args()
-
-    # Crear directorio de salida si no existe
+      # Crear directorio de salida si no existe
     os.makedirs(args.output, exist_ok=True)
+    
+    # Añadir importación de la función de carga
+    from eneagrama_predictor.optimized_enneagram_system import load_training_data
 
-    print(f"Cargando datos desde {args.data}...")
-    try:
-        # Load and preprocess data
-        data = pd.read_csv(args.data)
-        
-        # Determinar número de columnas de características (por defecto 135)
-        num_features = min(args.questions, data.shape[1] - 2)  # -2 para dejar las columnas de tipo y ala
-        
-        # Determinar los nombres correctos de las columnas
-        if 'true_type' in data.columns and 'true_wing' in data.columns:
-            type_col = 'true_type'
-            wing_col = 'true_wing'
-        else:
-            type_col = 'eneatipo'
-            wing_col = 'ala'
-        
-        # Para el modo optimize, usar todas las características
-        if args.mode == 'optimize':
-            # Usar todas las columnas disponibles (hasta 135)
-            max_features = min(135, data.shape[1] - 2)
-            X = data.iloc[:, :max_features]
-        else:
-            # Usar el número especificado de características
-            X = data.iloc[:, :num_features]
-        
-        # Crear DataFrame con las columnas necesarias
-        y = pd.DataFrame({
-            'true_type': data[type_col],
-            'true_wing': data[wing_col]
-        })
+    # Cargar datos desde Supabase o CSV
+    if args.data:
+        print(f"Cargando datos desde archivo CSV: {args.data}...")
+        try:
+            # Cargar desde CSV específico
+            data = pd.read_csv(args.data)
+            print(f"✅ Datos cargados desde CSV: {data.shape}")
+        except Exception as e:
+            print(f"❌ Error cargando CSV: {e}")
+            print("Intentando cargar desde Supabase como fallback...")
+            try:
+                X, y = load_training_data(source='supabase')
+                # Convertir de vuelta a formato original para compatibilidad
+                data = pd.concat([X, y], axis=1)
+                print(f"✅ Datos cargados desde Supabase: {data.shape}")
+            except Exception as e2:
+                print(f"❌ Error cargando desde Supabase: {e2}")
+                return
+    else:
+        print("📡 Cargando datos desde Supabase...")
+        try:
+            X, y = load_training_data(source='supabase')
+            # Convertir a formato original para compatibilidad con el resto del código
+            data = pd.concat([X, y], axis=1)
+            print(f"✅ Datos cargados desde Supabase: {data.shape}")
+        except Exception as e:
+            print(f"❌ Error cargando desde Supabase: {e}")
+            print("💡 Tip: Usa --data path/to/file.csv para cargar desde CSV")
+            return
+      # Determinar número de columnas de características (por defecto 135)
+    num_features = min(args.questions, data.shape[1] - 2)  # -2 para dejar las columnas de tipo y ala
+    
+    # Determinar los nombres correctos de las columnas
+    if 'true_type' in data.columns and 'true_wing' in data.columns:
+        type_col = 'true_type'
+        wing_col = 'true_wing'
+    else:
+        type_col = 'eneatipo'
+        wing_col = 'ala'
+      # Para el modo optimize, usar todas las características
+    if args.mode == 'optimize':
+        # Usar todas las columnas disponibles (hasta 135)
+        max_features = min(135, data.shape[1] - 2)
+        X = data.iloc[:, :max_features]
+    else:
+        # Usar el número especificado de características
+        X = data.iloc[:, :num_features]
+    
+    # Crear DataFrame con las columnas necesarias
+    y = pd.DataFrame({
+        'true_type': data[type_col],
+        'true_wing': data[wing_col]
+    })
 
-        print(f"Datos cargados: {X.shape[0]} muestras, {X.shape[1]} características")
-
-    except Exception as e:
-        print(f"Error loading data: {e}")
-        return
+    print(f"Datos cargados: {X.shape[0]} muestras, {X.shape[1]} características")
 
     # Realizar operación según el modo seleccionado
     if args.mode == 'train':
