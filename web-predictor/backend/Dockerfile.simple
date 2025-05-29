@@ -9,9 +9,9 @@ COPY src ./src
 
 # Configurar variables de entorno para indicar que estamos en Docker
 ENV DOCKER=true
-ENV PYTHONPATH="${PYTHONPATH}:/app"
+ENV PYTHONPATH="${PYTHONPATH}:/app:/app/model"
 
 EXPOSE 8000
 
 # Simple comando para iniciar la aplicación sin scripts adicionales
-CMD ["sh", "-c", "echo '📂 Buscando modelos...' && find /app -name '*.joblib' -type f | sort && echo '🚀 Iniciando API...' && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "echo '📂 Buscando modelos...' && find /app -name '*.joblib' -type f | sort && echo '🔍 Verificando estructura...' && ls -la /app/model/ 2>/dev/null || echo 'Directorio model no encontrado' && echo '🚀 Iniciando API...' && uvicorn src.main:app --host 0.0.0.0 --port 8000"]
