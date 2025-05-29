@@ -17,12 +17,14 @@ services:
     volumes:
       - ./model:/app/model
       - ./model/results:/app/results
-     
     ports:
       - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - DOCKER=true
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - TEST_RESULTS_TABLE=${TEST_RESULTS_TABLE}
     depends_on:
       - model
 

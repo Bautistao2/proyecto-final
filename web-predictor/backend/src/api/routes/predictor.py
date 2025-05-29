@@ -5,6 +5,7 @@ from typing import Annotated
 
 from src.schemas.prediction import PredictionRequest, PredictionResponse
 from src.services.model_service import ModelService
+from src.services.database_service import db_service
 from src.core.dependencies import get_model_service
 
 logger = logging.getLogger(__name__)
@@ -35,6 +36,20 @@ async def predict_enneagram(
         
         # Realizar predicción
         result = await model_service.predict(answers)
+        
+        # Guardar resultado en base de datos
+        session_id = await db_service.save_test_result(
+            answers=request.answers,  # Lista original de respuestas
+            eneatipo=result["enneagram_type"],  # Mapear correctamente
+            ala=result["wing"]  # Mapear correctamente
+        )
+        
+        # Añadir session_id a la respuesta
+        if session_id:
+            result["session_id"] = session_id
+            logger.info(f"✅ Resultado guardado con session_id: {session_id}")
+        else:
+            logger.warning("⚠️ No se pudo guardar el resultado en base de datos")
         
         return PredictionResponse(**result)
         
